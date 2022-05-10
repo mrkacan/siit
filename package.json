@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node server/index.js"
+    "start-server": "node server/index.js && cd src && yarn start",
+    "start-client": "cd src && yarn start"
   },
   "dependencies": {
     "cors": "^2.8.5",
