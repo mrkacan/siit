@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Siit Frontend Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Guidelines
 
-## Available Scripts
+- Make sure you have `git`, `node`, and `npm` or `yarn` installed locally
+- Clone this repo (do **not** fork it)
+- Solve the levels in ascending order
+- Only do one commit per level and include the `.git` directory when submitting your test
+- To start the app:
+  - run `yarn install` or `npm install`
+  - run `yarn start` or `npm run start`
+- Edit files in `./src`
 
-In the project directory, you can run:
+## Pointers
 
-### `npm start`
+You can have a look at the higher levels, but please do the simplest thing that could work for the level you're currently solving.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+We are interested in seeing code that is clean, extensible and robust, so don't overlook edge cases.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Please also note that all prices are stored as integers (in cents). Do not forget to format them if needed.
 
-### `npm test`
+We don't expect you to be a top-notch designer, but we want to see how you would handle some styling of this app. Do not hesitate to take inspiration from Siit or anywhere else!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This test is framework agnostic, feel free to stick to vanilla HTML/JS/CSS or go with anything else. If you plan on using something else (e.g. React, Vue, TypeScript, styled components, ...), you'll find info on how to set it up in [Parcel's documentation](https://en.parceljs.org/recipes.html).
 
-### `npm run build`
+## Sending Your Results
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can send your Github project link or zip your directory and send it via email.
+If you do not use Github, don't forget to attach your `.git` folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Good luck!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Challenge
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+We are building an employee platform. Let's call it Siit :)
+Companies can already fetch infos from their different SAAS and backend developers have provided an API for us to query.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Our plan is to display these informations.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Level 1: Fetching our employees
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+For this first version, we want to list all our users with their profile pic, name, position. Display these information on the index page.
 
-## Learn More
+This API is accessible with a `GET` request at `/users.json` on your local server.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Level 2: Fetching our services
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We now want to list all the services that the company is using, along with their logo, and a link to open the service's homepage on a new tab.
 
-### Code Splitting
+This API is accessible with a `GET` request at `/services.json` on your local server. Show these information on the same index page below the user list.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Level 3: Showing users of a given service
 
-### Analyzing the Bundle Size
+We now want to filter our users by service. Example: clicking on the Payfit service should only display two users.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+You can use the route `GET /users.json?service_id=xxx` by replacing with the correct `service_id` on your local server.
 
-### Making a Progressive Web App
+### Level 4: Showing price information
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+For each service, we want to see the monthly cost. Use the fields `price` on the `service.json` enpdoint to compute the monthly price as follow:
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- MONTHLY_COST = FLAT_COST + COST_PER_USER * (NB_USERS_USING_THE_SERVICE - NB_USERS_INCLUDED)
+# siit
