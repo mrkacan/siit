@@ -1,9 +1,10 @@
 import * as types from './types';
 import {EmployeeItem} from "./types";
 
-const getEmployees = (): types.EmployeesActionTypes => {
+const getEmployees = (id: number | undefined): types.EmployeesActionTypes => {
     return {
         type: types.GET_EMPLOYEES,
+        payload: id
     };
 };
 
@@ -26,5 +27,6 @@ const getEmployeesError = (error: string): types.EmployeesActionTypes => {
 
 export {
     getEmployees,
-    getEmployeesSuccess
+    getEmployeesSuccess,
+    getEmployeesError
 };

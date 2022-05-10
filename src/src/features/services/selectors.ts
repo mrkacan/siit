@@ -1,11 +1,11 @@
-import * as moviesTypes from "./types";
+import * as servicesTypes from "./types";
 
-export const getEmployeesSelector = ({employee}: {
-    employee: moviesTypes.EmployeesState,
+export const getServicesSelector = ({services}: {
+    services: servicesTypes.ServicesState,
 }) => {
     return {
-        data: employee.data,
-        isLoading: employee.isLoading,
-        error: employee.error
+        data: services.data,
+        isLoading: services.isLoading,
+        error: services.error
     }
 }

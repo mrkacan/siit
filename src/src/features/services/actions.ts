@@ -1,23 +1,23 @@
 import * as types from './types';
-import {EmployeeItem} from "./types";
+import {ServiceItem} from "./types";
 
-const getEmployees = (): types.EmployeesActionTypes => {
+const getServices = (): types.ServicesActionTypes => {
     return {
-        type: types.GET_EMPLOYEES,
+        type: types.GET_SERVICES,
     };
 };
 
-const getEmployeesSuccess = (data: EmployeeItem[]): types.EmployeesActionTypes => {
+const getServicesSuccess = (data: ServiceItem[]): types.ServicesActionTypes => {
     return {
-        type: types.GET_EMPLOYEES_SUCCESS,
+        type: types.GET_SERVICES_SUCCESS,
         payload: {
             data,
         },
     };
 };
-const getEmployeesError = (error: string): types.EmployeesActionTypes => {
+const getServicesError = (error: string): types.ServicesActionTypes => {
     return {
-        type: types.GET_EMPLOYEES_FAILURE,
+        type: types.GET_SERVICES_FAILURE,
         payload: {
             error,
         },
@@ -25,7 +25,7 @@ const getEmployeesError = (error: string): types.EmployeesActionTypes => {
 };
 
 export {
-    getEmployees,
-    getEmployeesSuccess,
-    getEmployeesError
+    getServices,
+    getServicesSuccess,
+    getServicesError
 };

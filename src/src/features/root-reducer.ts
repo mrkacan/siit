@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import {reducer as mediasReducer} from './medias/reducers';
+import {reducer as employeeReducer} from './employee/reducers';
+import {reducer as servicesReducer} from './services/reducers';
 
 const reducer = combineReducers({
-    medias: mediasReducer,
+    employee: employeeReducer,
+    services: servicesReducer,
 });
 
 export {reducer};

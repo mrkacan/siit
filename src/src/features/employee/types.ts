@@ -6,6 +6,7 @@ const GET_EMPLOYEES_FAILURE = 'GET_EMPLOYEES_FAILURE';
 
 export interface GetEmployeesAction extends Action {
     type: typeof GET_EMPLOYEES;
+    payload: number | undefined
 }
 
 interface GetEmployeesSuccessAction extends Action {
@@ -38,18 +39,6 @@ export interface EmployeeItem {
     id: number;
     name: string;
     position: string;
-}
-
-export interface EmployeeItemResponse {
-    data: EmployeeItem[];
-    href: string;
-    links: string[]
-}
-
-export type EmployeesAPIResponse = {
-    collection: {
-        items: EmployeeItemResponse[]
-    }
 }
 
 export {

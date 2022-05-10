@@ -1,54 +1,57 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {DatePicker, Divider, Image, List} from 'antd';
-import * as mediaAction from "../../features/medias/actions";
-import moment, {Moment} from "moment";
-import {getMediasSelector} from "../../features/medias/selectors";
-import {Link} from 'react-router-dom';
+import {Divider, Table} from 'antd';
+import * as servicesAction from "../../features/services/actions";
+import {useNavigate} from 'react-router-dom';
+import {getServicesSelector} from "../../features/services/selectors";
 
-const {RangePicker} = DatePicker;
-
-const Employees: React.FC = () => {
+const Services: React.FC = () => {
     const dispatch = useDispatch();
     const {
         data,
         isLoading,
-        error
-    } = useSelector(getMediasSelector)
+    } = useSelector(getServicesSelector)
+    const navigate = useNavigate();
+    const columns = [
+        {
+            title: 'Avatar',
+            dataIndex: 'logo_url',
+            key: 'name',
+            render: link => <img width={70} src={link}/>,
+        },
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: 'Website URL',
+            dataIndex: 'website_url',
+            key: 'website_url',
+        },
+        {
+            title: 'Monthly Cost',
+            dataIndex: 'monthlyCost',
+            key: 'monthlyCost',
+            render: text => <div>{`$${text}`}</div>
+        },
+    ]
 
-    const onCalendarChange = (dates: Moment[]) => {
-        const yearStart = dates?.[0] ? moment(dates[0]).format("YYYY") : ""
-        const yearEnd = dates?.[1] ? moment(dates[1]).format("YYYY") : ""
-        if (yearStart && yearEnd) {
-            dispatch(mediaAction.getMedias(yearStart, yearEnd));
-        }
-    }
+    useEffect(() => {
+        dispatch(servicesAction.getServices());
+    }, [])
+
     return (
-        <div className="container h-screen text-center pt-8">
-            <div>
-                <RangePicker picker="year" bordered={true} onCalendarChange={onCalendarChange}/>
-            </div>
+        <>
             <Divider/>
-            <List
-                loading={isLoading}
-                bordered
-                dataSource={data}
-                renderItem={item => (
-                    <Link to={`show/${item.nasa_id}`}>
-                        <div className="flex flex-row items-start p-4">
-                            <Image src={item.images[4]} width={100}/>
-                            <div className="text-left pl-4">
-                                <h6 className="">{item.title}</h6>
-                                <div
-                                    className="text-gray-500">{`${item.location} - ${item.photographer}`}</div>
-                            </div>
-                        </div>
-                        <Divider/>
-                    </Link>
-                )}
-            />
-        </div>
+            <Table dataSource={data} columns={columns} loading={isLoading}
+                   onRow={(record, rowIndex) => {
+                       return {
+                           onClick: event => navigate(`/employees/${record.id}`),
+                       };
+                   }}/>
+        </>
     );
 }
 
-export default Employees;
+export default Services;

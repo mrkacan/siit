@@ -1,27 +1,27 @@
 import * as types from './types';
 
-const initialState: types.EmployeesState = {
+const initialState: types.ServicesState = {
     data: [],
     isLoading: false,
     error: ''
 };
 
-const reducer = (state = initialState, action: types.EmployeesActionTypes) => {
+const reducer = (state = initialState, action: types.ServicesActionTypes) => {
     switch (action.type) {
-    case types.GET_EMPLOYEES: {
+    case types.GET_SERVICES: {
         return {
             ...state,
             isLoading: true
         };
     }
-    case types.GET_EMPLOYEES_SUCCESS: {
+    case types.GET_SERVICES_SUCCESS: {
         return {
             ...state,
             isLoading: false,
             data: action.payload.data,
         };
     }
-    case types.GET_EMPLOYEES_FAILURE: {
+    case types.GET_SERVICES_FAILURE: {
         return {
             ...state,
             isLoading: false,

@@ -1,47 +1,55 @@
 import {Action} from 'redux';
 
-const GET_EMPLOYEES = 'GET_EMPLOYEES';
-const GET_EMPLOYEES_SUCCESS = 'GET_EMPLOYEES_SUCCESS';
-const GET_EMPLOYEES_FAILURE = 'GET_EMPLOYEES_FAILURE';
+const GET_SERVICES = 'GET_SERVICES';
+const GET_SERVICES_SUCCESS = 'GET_SERVICES_SUCCESS';
+const GET_SERVICES_FAILURE = 'GET_SERVICES_FAILURE';
 
-export interface GetEmployeesAction extends Action {
-    type: typeof GET_EMPLOYEES;
+export interface GetServicesAction extends Action {
+    type: typeof GET_SERVICES;
 }
 
-interface GetEmployeesSuccessAction extends Action {
-    type: typeof GET_EMPLOYEES_SUCCESS;
+interface GetServicesSuccessAction extends Action {
+    type: typeof GET_SERVICES_SUCCESS;
     payload: {
-        data: EmployeeItem[];
+        data: ServiceItem[];
     };
 }
 
-interface GetEmployeesErrorAction extends Action {
-    type: typeof GET_EMPLOYEES_FAILURE;
+interface GetServicesErrorAction extends Action {
+    type: typeof GET_SERVICES_FAILURE;
     payload: {
         error: string;
     };
 }
 
-export type EmployeesActionTypes =
-    | GetEmployeesAction
-    | GetEmployeesSuccessAction
-    | GetEmployeesErrorAction
+export type ServicesActionTypes =
+    | GetServicesAction
+    | GetServicesSuccessAction
+    | GetServicesErrorAction
 
-export type EmployeesState = {
-    data: EmployeeItem[];
+export type ServicesState = {
+    data: ServiceItem[];
     isLoading: boolean;
     error: string;
 }
 
-export interface EmployeeItem {
-    avatar_url: string;
+export interface ServiceItemResponse {
     id: number;
+    logo_url: string;
     name: string;
-    position: string;
+    price: {
+        cost_per_user: number;
+        flat_cost: number;
+        nb_users_included: number;
+    };
+    website_url: string;
+}
+export interface ServiceItem extends ServiceItemResponse {
+    monthlyCost: number;
 }
 
 export {
-    GET_EMPLOYEES,
-    GET_EMPLOYEES_SUCCESS,
-    GET_EMPLOYEES_FAILURE,
+    GET_SERVICES,
+    GET_SERVICES_SUCCESS,
+    GET_SERVICES_FAILURE,
 };

@@ -1,37 +1,23 @@
-import {all, call, put, takeEvery} from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 import * as types from './types';
+import {GET_EMPLOYEES, GetEmployeesAction} from './types';
 import * as actions from './actions';
-import {GET_EMPLOYEES} from './types';
-import {GET_SEARCH_DATA_API} from '../../api/api';
+import {GET_EMPLOYEES_API} from '../../api/apis';
 
-function* handler() {
-    yield takeEvery(GET_EMPLOYEES, getEmployees);
-}
+const getEmployeesSaga = [
+    takeEvery(GET_EMPLOYEES, getEmployees)
+]
 
-function* getEmployees(action: types.GetEmployeesAction) {
+function* getEmployees(action: GetEmployeesAction) {
     try {
-        const response: types.EmployeeItem[] = yield call(GET_SEARCH_DATA_API);
+        const response: types.EmployeeItem[] = yield call(GET_EMPLOYEES_API, action.payload);
 
-        console.log('response',response)
-
-
-        // if (response) {
-        //     const mediaData: types.EmployeeItem[] = yield all(
-        //         response?.collection?.items?.map(function* (media) {
-        //             const images = yield call(() => fetch(media?.href).then((response) => response.json()))
-        //             return {
-        //                 ...media?.data?.[0],
-        //                 images
-        //             };
-        //         }),
-        //     );
-        //
-        //     yield put(actions.getEmployeesSuccess(mediaData));
-        // }
+        yield put(actions.getEmployeesSuccess(response));
 
     } catch (error) {
+        yield put(actions.getEmployeesError("Error"));
         console.error(error);
     }
 }
 
-export {handler};
+export {getEmployeesSaga};

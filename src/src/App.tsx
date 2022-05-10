@@ -1,23 +1,41 @@
 import React from 'react';
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, Navigate} from "react-router-dom";
 import './App.css';
-import Search from "./pages/Search/Search";
-import Show from "./pages/Show/Show";
-import 'antd/dist/antd.css';
+import Employees from "./pages/Employees/Employees";
+import 'antd/dist/antd.min.css';
+import Services from "./pages/Services/Services";
+import Menu from "./component/Menu";
 
-function App2() {
+export const PAGES = {
+    EMPLOYEES: {
+        route: 'employees',
+        component: <Employees/>,
+        name: "Employees"
+    },
+    SERVICES: {
+        route: 'services',
+        component: <Services/>,
+        name: "Services"
+    },
+}
+
+function App() {
     return (
         <div className="w-screen h-full bg-gray-100">
             <div className="container px-4 mx-auto bg-white h-full">
-                <Routes>
-                    <Route path="/" element={<Search/>}/>
-                    <Route path="show">
-                        <Route path=":id" element={<Show/>}/>
-                    </Route>
-                </Routes>
+                <div className="container h-screen text-center pt-8">
+                    <Menu/>
+                    <Routes>
+                        <Route path="*" element={<Navigate to="/employees" />}/>
+                        <Route path={PAGES.EMPLOYEES.route} element={PAGES.EMPLOYEES.component}>
+                            <Route path=":id" element={PAGES.EMPLOYEES.component}/>
+                        </Route>
+                        <Route path={PAGES.SERVICES.route} element={PAGES.SERVICES.component}/>
+                    </Routes>
+                </div>
             </div>
         </div>
     );
 }
 
-export default App2;
+export default App;
